@@ -1,0 +1,62 @@
+<div id="header">
+  <img src="https://www.atchayamtrust.com/frontend/images/webimages/favicon.png" style="position: absolute; padding-left: 450px; width: 90px; padding-top: 15px;" >
+  <h1 style="text-align: center; padding-top: 15px;">ATCHAYAM TRUST</h1>
+  <h4 style="text-align: center;">Creating a Beggar Free India </h4>
+</div><br>
+<div id="side1">
+  <div id="s1" class="form-group">
+    <form #myForm="ngForm">
+      <h3 style="padding-left: 40px;"><u>VOLUNTEER FORM</u></h3><br>Volunteer Id<br>
+      <input type="text" placeholder="1001" class="form-control" name="volId" #volId="ngModel" ngModel required pattern="[0-9]+"/>
+      <div *ngIf="volId.touched">
+        <div *ngIf="volId.errors?.['required']">
+            <b style="color: red;">Volunteer ID Required.</b>
+        </div>
+        <div *ngIf="volId.errors?.['pattern']">
+            <b style="color: red;">Invalid volId.</b>
+        </div>
+    </div>
+      Volunteer Name<br>
+      <input type="text" placeholder="Enter the Name" name="volName" #volName="ngModel" ngModel required/><br>
+      <div *ngIf="volName.touched">
+        <div *ngIf="volName.errors?.['required']">
+            <b style="color: red;">Volunteer Name Required.</b>
+        </div>
+    </div>
+      Place<br>
+      <input type="text" placeholder="Enter the Place" name="volPlace" #volPlace="ngModel" ngModel required/><br>
+      <div *ngIf="volPlace.touched">
+        <div *ngIf="volPlace.errors?.['required']">
+            <b style="color: red;">Volunteer Place Required.</b>
+        </div>
+      </div>
+      DOB<br>
+      <input type="date" id="dot">
+      <br><br>
+        <button class="btn btn-primary" (click)="savevol(myForm.value)">Save</button>&nbsp;&nbsp;
+        <button class="btn btn-primary"  (click)="updatevol(myForm.value)">Edit Client</button>&nbsp;&nbsp;
+        <button class="btn btn-danger" (click)="deletevol(myForm.value)">Delete</button>&nbsp;&nbsp;
+        <button class="btn btn-danger" (click)="findvol(myForm.value)">Find</button>&nbsp;&nbsp;
+        <button class="btn btn-danger" (click)="findallvol()">Find All</button>&nbsp;&nbsp;
+      </form>
+      <br>
+
+    </div>
+  <div id="s2">
+    <h3>{{result}}</h3>
+        <div style="width: 80%; padding-left: 10px;" *ngIf="flag" >
+            <table width="80%" align="center" class="table table-bordered">
+                <tr>
+                    <th>CLI-ID</th>
+                    <th>Client Name</th>
+                    <th>Place</th>
+                </tr>
+                <tr *ngFor="let bke of volArr">
+                    <td>{{bke.id}}</td>
+                    <td>{{bke.volName}}</td>
+                    <td>{{bke.volPlace}}</td>
+                </tr>
+            </table>
+        </div>
+  </div>
+</div>
